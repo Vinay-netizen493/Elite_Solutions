@@ -1,12 +1,19 @@
 class Solution {
-    public TreeNode invertTree(TreeNode root) {
-         if (root == null) {
-            return null;
+    int tot=0;
+    public int sum(TreeNode node){
+        if(node==null){
+            return 0;
         }
-        TreeNode right = invertTree(root.right);
-        TreeNode left = invertTree(root.left);
-        root.left = right;
-        root.right = left;
-        return root;
+        int ls=sum(node.left);
+        int rs=sum(node.right);
+        int tilt=Math.abs(ls-rs);
+        tot+=tilt;
+        return node.val+ls+rs;
+    }
+    
+    public int findTilt(TreeNode root) {
+        tot=0;
+        sum(root);
+        return tot;
     }
 }
